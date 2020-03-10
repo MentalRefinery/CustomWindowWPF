@@ -9,7 +9,9 @@
         AllowsTransparency="True"
         Icon="Images/Logo/logo-small.png"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="TestingTest" FontSize="40"></TextBlock>
+        <TextBlock Text="TestingTest" FontFamily="{StaticResource LatoThin}" FontSize="40"></TextBlock>
+        <TextBlock Text="TestingTest" FontFamily="{StaticResource LatoRegular}" FontSize="40"></TextBlock>
+    </StackPanel>
 </Window>
