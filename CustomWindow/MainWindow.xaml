@@ -7,11 +7,20 @@
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        x:Name="AppWindow"
         Icon="Images/Logo/logo-small.png"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <TextBlock Text="TestingTest" FontSize="40"></TextBlock>
-        <TextBlock Text="TestingTest" FontFamily="{StaticResource LatoThin}" FontSize="40"></TextBlock>
-        <TextBlock Text="TestingTest" FontFamily="{StaticResource LatoRegular}" FontSize="40"></TextBlock>
-    </StackPanel>
+        Title="Custom Window" Height="600" Width="900">
+    
+   
+        <WindowChrome.WindowChrome>
+            <WindowChrome
+                ResizeBorderThickness="{Binding ResizeBorderThickness}"
+                
+                />
+
+           
+        </WindowChrome.WindowChrome>
+    
+   
 </Window>

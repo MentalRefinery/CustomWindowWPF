@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CustomWindow.ViewModel;
+
 
 namespace CustomWindow
 {
@@ -23,6 +25,8 @@ namespace CustomWindow
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new WindowViewModel(this);
         }
     }
 }
