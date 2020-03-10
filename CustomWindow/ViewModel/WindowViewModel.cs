@@ -71,6 +71,15 @@ namespace CustomWindow.ViewModel
         /// The radius of the edges of the window.
         /// </summary>
         public CornerRadius WindowCornerRadius { get { return new CornerRadius(WindowRadius); } }
+
+        /// <summary>
+        /// The height of the Title Bar / Caption of the window
+        /// </summary>
+        public int TitleHeight { get; set; } = 42;
+        /// <summary>
+        /// The height of the Title Bar / Caption of the window
+        /// </summary>
+        public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight + ResizeBorder); } }
         #endregion
         #region Constructor
         /// <summary>
@@ -81,7 +90,9 @@ namespace CustomWindow.ViewModel
             mWindow = window;
 
             //Listen out for the window resizing
+#pragma warning disable CA1062 // Validate arguments of public methods
             mWindow.StateChanged += (sender, e) =>
+#pragma warning restore CA1062 // Validate arguments of public methods
             {
                 //Fire off events for all properties that are affected by a resize
                 OnPropertyChanged(nameof(ResizeBorderThickness));

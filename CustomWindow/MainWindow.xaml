@@ -11,11 +11,80 @@
         x:Name="AppWindow"
         Icon="Images/Logo/logo-small.png"
         Title="Custom Window" Height="600" Width="900">
-    
-   
+
+    <Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!-- Outer border with the  dropshadow margin-->
+                        <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}">
+                            
+                            <!-- Main window outline-->
+                            <Grid>
+                                
+                                <!-- Window border and dropshadow -->
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        Background="{Binding ForegroundLightBrush, FallbackValue=White}">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2"/>
+                                    </Border.Effect>
+                                </Border>
+
+                                <!-- The main window content -->
+                                <Grid>
+                                    
+                                    <Grid.RowDefinitions>
+                                        
+                                        <!-- Title Bar -->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}"/>
+
+                                        <!-- Drop Shadow -->
+                                        <RowDefinition Height="Auto"/>
+
+                                        <!-- Window Content -->
+                                        <RowDefinition Height="*"/>
+                                        
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- Title Bar -->
+                                    <Grid Grid.Column="0" Panel.ZIndex="1">
+                                        <Grid.ColumnDefinitions>
+                                            
+                                            <!-- Icon -->
+                                            <ColumnDefinition Width="Auto"/>
+                                            
+                                            <!-- Title -->
+                                            <ColumnDefinition Width="*"/>
+                                            
+                                            <!-- Window Buttons -->
+                                            <ColumnDefinition Width="Auto"/>
+                                            
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Icon-->
+                                        <Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}">
+                                            <Image Source="/Images/Logo/logo-small.png"/>
+                                        </Button>
+                                        
+                                    </Grid>
+                                    
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
         <WindowChrome.WindowChrome>
             <WindowChrome
                 ResizeBorderThickness="{Binding ResizeBorderThickness}"
+                CaptionHeight="{Binding TitleHeight}"
+                CornerRadius="0"
+                GlassFrameThickness="0"
+                
                 
                 />
 
