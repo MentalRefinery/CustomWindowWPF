@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomWindow"
         mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Icon="Images/Logo/logo-small.png"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         
