@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CustomWindow.ViewModel
 {
@@ -20,7 +22,6 @@ namespace CustomWindow.ViewModel
         /// </summary>
         private int mWindowRadius = 10;
         #endregion
-
         #region Public Properties
         /// <summary>
         /// The size of the resize border around the window
@@ -81,6 +82,29 @@ namespace CustomWindow.ViewModel
         /// </summary>
         public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight + ResizeBorder); } }
         #endregion
+        #region Commands
+
+        /// <summary>
+        /// The command to minimize the window.
+        /// </summary>
+        public ICommand MinimizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to maximize the window.
+        /// </summary>
+        public ICommand MaximizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to close the window.
+        /// </summary>
+        public ICommand CloseCommand { get; set; }
+
+        /// <summary>
+        /// The command to show the system menu of the window.
+        /// </summary>
+        public ICommand MenuCommand { get; set; }
+
+        #endregion
         #region Constructor
         /// <summary>
         /// Default Constructor
@@ -101,9 +125,30 @@ namespace CustomWindow.ViewModel
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
             };
+
+            //Create Commands
+            MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Minimized);
+            CloseCommand = new RelayCommand(() => mWindow.Close());
+            MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
         }
 
-       
+
+        #endregion
+        #region Private helpers
+        /// <summary>
+        /// Gets the current mouse position on the screen
+        /// </summary>
+        /// <returns></returns>
+        private Point GetMousePosition()
+        {
+            // Position of the mouse relative to the window
+            var position = Mouse.GetPosition(mWindow);
+
+            // Add the window position so its a "ToScreen"
+            return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
+        }
+
         #endregion
     }
 }
