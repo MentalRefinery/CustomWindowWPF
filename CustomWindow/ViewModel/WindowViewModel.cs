@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
+
 namespace CustomWindow.ViewModel
 {
     /// <summary>
@@ -38,7 +39,10 @@ namespace CustomWindow.ViewModel
         /// The size of the resize border around the window
         /// </summary>
         public int ResizeBorder { get; set; } = 6;
-
+        /// <summary>
+        /// The the padding of the inner content of the main window
+        /// </summary>
+        public Thickness InnerContentPaddingThickness { get { return new Thickness(ResizeBorder); } }
         /// <summary>
         /// Size of the resize border around the window, taking into account the outer margin.
         /// </summary>
@@ -142,6 +146,9 @@ namespace CustomWindow.ViewModel
             MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(() => mWindow.Close());
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
+
+            //Fix Window Resize Issue
+            var resizer = new WindowResizer(mWindow);
         }
 
 

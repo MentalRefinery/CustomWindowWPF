@@ -99,6 +99,19 @@
                                                 <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
                                             </LinearGradientBrush>
                                         </Border.BorderBrush>
+                                        <!-- Drop shadow -->
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0"/>
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
+                                                
+                                                
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <!-- Page Content-->
+                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
                                 </Grid>
 
@@ -114,13 +127,14 @@
                 ResizeBorderThickness="{Binding ResizeBorderThickness}"
                 CaptionHeight="{Binding TitleHeight}"
                 CornerRadius="0"
-                GlassFrameThickness="0"
-                
-                
-                />
+                GlassFrameThickness="0"/>
+
+        
 
            
         </WindowChrome.WindowChrome>
-    
-   
+    <Grid Background="{StaticResource ForegroundLightBrush}">
+        
+    </Grid>
+
 </Window>
