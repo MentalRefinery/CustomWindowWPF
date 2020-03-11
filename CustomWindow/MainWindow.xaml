@@ -10,6 +10,8 @@
         WindowStartupLocation="CenterScreen"
         x:Name="AppWindow"
         Icon="Images/Logo/logo-small.png"
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}"
         Title="Custom Window" Height="600" Width="900">
 
     <Window.Resources>
@@ -21,8 +23,12 @@
                         <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}">
                             
                             <!-- Main window outline-->
+                           
                             <Grid>
-                                
+                                <!--Opacity Mask for corners on grid-->
+                                <Border x:Name="Container"
+                                    Background="{StaticResource BackgroundLightBrush}"
+                                    CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"/>
                                 <!-- Window border and dropshadow -->
                                 <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
                                         Background="{Binding ForegroundLightBrush, FallbackValue=White}">
@@ -34,6 +40,10 @@
                                 <!-- The main window content -->
                                 <Grid>
                                     
+                                    <!-- Corner Clipping -->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}"/>
+                                    </Grid.OpacityMask>
                                     <Grid.RowDefinitions>
                                         
                                         <!-- Title Bar -->
@@ -73,13 +83,23 @@
                                         
                                         <!-- Window Buttons-->
                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
-                                            <Button Content="_"/>
-                                            <Button Content="[ ]"/>
-                                            <Button Content="X"/>
-
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_"/>
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowControlButton}" Content="[ ]"/>
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X"/>
                                         </StackPanel>
                                     </Grid>
                                     
+                                    <!-- Drop Shadow-->
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0 0.2 0 0">
+                                        <!-- Underline-->
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0"/>
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5"/>
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
                                 </Grid>
 
                             </Grid>
