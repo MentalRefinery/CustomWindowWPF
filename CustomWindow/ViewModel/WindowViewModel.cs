@@ -23,6 +23,17 @@ namespace CustomWindow.ViewModel
         private int mWindowRadius = 10;
         #endregion
         #region Public Properties
+
+        /// <summary>
+        /// The smallest window width allowed.
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 400;
+        /// <summary>
+        /// The smallest window height allowed.
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+
+
         /// <summary>
         /// The size of the resize border around the window
         /// </summary>
@@ -128,7 +139,7 @@ namespace CustomWindow.ViewModel
 
             //Create Commands
             MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
-            MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(() => mWindow.Close());
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
         }
